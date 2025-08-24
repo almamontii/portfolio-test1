@@ -33,7 +33,7 @@ h3 {
 .section-title {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     color: #2c3e50;
 }
 
@@ -292,9 +292,8 @@ h3 {
 
 /* ===== ABOUT SECTION ===== */
 .about {
-    padding: 1rem 0 5rem 0;
+    padding: 3rem 0 5rem 0;
     background: white;
-    margin-top: -2rem;
 }
 
 .about-content {
