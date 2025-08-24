@@ -1,0 +1,15 @@
+# GitHub Pages Configuration
+title: "Portfolio Artístico"
+description: "Portfolio de artista creativo - Transformando ideas en arte visual"
+baseurl: "/portfolio-test1"
+url: "https://almamontii.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude files
+exclude:
+  - README.md
+  - config.js
+  - index_new.html
