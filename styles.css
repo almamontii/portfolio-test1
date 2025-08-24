@@ -222,15 +222,15 @@ h3 {
 
 .hero-placeholder {
     width: 100%;
-    max-width: clamp(350px, 90%, 600px);
-    height: clamp(250px, 25vh, 350px);
+    max-width: clamp(400px, 95%, 700px);
+    height: clamp(300px, 35vh, 450px);
     background: white;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #333;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
     position: relative;
     overflow: hidden;
     cursor: pointer;
