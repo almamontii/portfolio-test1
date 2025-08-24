@@ -368,9 +368,8 @@ let currentHeroIndex = 0;
 
 function updateHeroContent(index) {
     const heroPlaceholder = document.querySelector('.hero-placeholder');
-    const heroCaption = document.querySelector('.hero-caption');
     
-    if (heroPlaceholder && heroCaption) {
+    if (heroPlaceholder) {
         const image = heroImages[index];
         
         // Actualizar contenido del placeholder
@@ -386,12 +385,6 @@ function updateHeroContent(index) {
             // Si no hay imagen, mostrar el icono
             heroPlaceholder.innerHTML = `<i class="${image.icon}"></i>`;
         }
-        
-        // Actualizar texto
-        heroCaption.innerHTML = `
-            <p>${image.title}</p>
-            <p>${image.subtitle}</p>
-        `;
     }
 }
 
