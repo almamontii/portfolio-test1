@@ -322,15 +322,18 @@ const skillObserver = new IntersectionObserver((entries) => {
 skillBars.forEach(bar => skillObserver.observe(bar));
 
 // ===== EFECTOS DE PARALLAX SUAVE =====
+// Comentado para evitar que el div pequeño se mueva
+/*
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const parallaxElements = document.querySelectorAll('.hero-placeholder, .about-placeholder');
-
+    
     parallaxElements.forEach(element => {
         const speed = 0.5;
         element.style.transform = `translateY(${scrolled * speed}px)`;
     });
 });
+*/
 
 // ===== DETECCIÓN DE REDUCED MOTION =====
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -366,15 +369,19 @@ let currentHeroIndex = 0;
 function updateHeroContent(index) {
     const heroPlaceholder = document.querySelector('.hero-placeholder');
     const heroCaption = document.querySelector('.hero-caption');
-    const dots = document.querySelectorAll('.dot');
     
-    if (heroPlaceholder && heroCaption && dots.length > 0) {
+    if (heroPlaceholder && heroCaption) {
         const image = heroImages[index];
         
         // Actualizar contenido del placeholder
         if (image.image) {
             // Si hay una imagen cargada, mostrarla
-            heroPlaceholder.innerHTML = `<img src="${image.image}" alt="Hero image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">`;
+            heroPlaceholder.innerHTML = `
+                <img src="${image.image}" alt="Hero image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                <div class="image-overlay">
+                    <i class="fas fa-edit" title="Cambiar imagen"></i>
+                </div>
+            `;
         } else {
             // Si no hay imagen, mostrar el icono
             heroPlaceholder.innerHTML = `<i class="${image.icon}"></i>`;
@@ -385,11 +392,6 @@ function updateHeroContent(index) {
             <p>${image.title}</p>
             <p>${image.subtitle}</p>
         `;
-        
-        // Actualizar dots
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
     }
 }
 
@@ -404,8 +406,17 @@ function loadHeroImage() {
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
+                // Guardar la imagen en el array
                 heroImages[currentHeroIndex].image = e.target.result;
+                
+                // Guardar en localStorage para persistencia
+                localStorage.setItem('heroImages', JSON.stringify(heroImages));
+                
+                // Actualizar la visualización
                 updateHeroContent(currentHeroIndex);
+                
+                // Mostrar notificación de éxito
+                showNotification('Imagen cargada correctamente!', 'success');
             };
             reader.readAsDataURL(file);
         }
@@ -414,33 +425,47 @@ function loadHeroImage() {
     input.click();
 }
 
+// Función para cargar imágenes guardadas al iniciar
+function loadSavedImages() {
+    const savedImages = localStorage.getItem('heroImages');
+    if (savedImages) {
+        try {
+            const parsedImages = JSON.parse(savedImages);
+            // Actualizar solo las imágenes que están guardadas
+            parsedImages.forEach((savedImage, index) => {
+                if (savedImage.image && index < heroImages.length) {
+                    heroImages[index].image = savedImage.image;
+                }
+            });
+                console.log('Imágenes guardadas cargadas correctamente');
+} catch (error) {
+    console.error('Error al cargar imágenes guardadas:', error);
+}
+}
+
+// Función para eliminar imagen
+function removeHeroImage() {
+    if (heroImages[currentHeroIndex].image) {
+        // Eliminar la imagen
+        heroImages[currentHeroIndex].image = null;
+        
+        // Guardar en localStorage
+        localStorage.setItem('heroImages', JSON.stringify(heroImages));
+        
+        // Actualizar la visualización
+        updateHeroContent(currentHeroIndex);
+        
+        // Mostrar notificación
+        showNotification('Imagen eliminada. Haz clic para agregar una nueva.', 'success');
+    }
+}
+    }
+}
+
 // Event listeners para navegación
 document.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.querySelector('.nav-prev');
-    const nextBtn = document.querySelector('.nav-next');
-    const dots = document.querySelectorAll('.dot');
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            currentHeroIndex = (currentHeroIndex - 1 + heroImages.length) % heroImages.length;
-            updateHeroContent(currentHeroIndex);
-        });
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
-            updateHeroContent(currentHeroIndex);
-        });
-    }
-
-        // Event listeners para dots
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            currentHeroIndex = index;
-            updateHeroContent(currentHeroIndex);
-        });
-    });
+    // Cargar imágenes guardadas al iniciar
+    loadSavedImages();
     
         // Event listener para cargar imagen al hacer clic en el placeholder
     const heroPlaceholder = document.querySelector('.hero-placeholder');
@@ -453,45 +478,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadHeroImage();
             }
         });
+        
+        // Agregar doble clic para eliminar imagen
+        heroPlaceholder.addEventListener('dblclick', removeHeroImage);
+        
+        // Event listener para el overlay de edición (se agrega dinámicamente)
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.image-overlay')) {
+                loadHeroImage();
+            }
+        });
     }
     
-    // Auto-rotate cada 5 segundos
-    setInterval(() => {
-        currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
-        updateHeroContent(currentHeroIndex);
-    }, 5000);
 
-    // Funcionalidad de swipe para móvil
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    const heroContainer = document.querySelector('.hero-container');
-    if (heroContainer) {
-        heroContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        heroContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-    }
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                // Swipe izquierda - siguiente imagen
-                currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
-            } else {
-                // Swipe derecha - imagen anterior
-                currentHeroIndex = (currentHeroIndex - 1 + heroImages.length) % heroImages.length;
-            }
-            updateHeroContent(currentHeroIndex);
-        }
-    }
 });
 
 console.log('Portfolio artístico cargado correctamente! 🎨');

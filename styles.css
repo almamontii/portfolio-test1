@@ -186,12 +186,14 @@ h3 {
     justify-content: center;
     align-items: center;
     min-height: 500px;
+    position: relative;
 }
 
 .hero-image-container {
     position: relative;
     width: 100%;
     max-width: 600px;
+    transform: translateZ(0);
 }
 
 .hero-image {
@@ -216,6 +218,7 @@ h3 {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
+    transform: translateZ(0);
 }
 
 .hero-placeholder i {
@@ -236,6 +239,31 @@ h3 {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
+.image-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-placeholder:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay i {
+    font-size: 0.8rem;
+}
+
 .hero-caption {
     text-align: center;
     color: #666;
@@ -249,53 +277,7 @@ h3 {
     margin-bottom: 0.5rem;
 }
 
-.hero-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 300px;
-    margin: 0 auto;
-}
 
-.nav-arrow {
-    background: none;
-    border: none;
-    color: #2c3e50;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-arrow:hover {
-    background: rgba(102, 126, 234, 0.1);
-    color: #667eea;
-}
-
-.nav-dots {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #ddd;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dot.active {
-    background: #667eea;
-    transform: scale(1.2);
-}
 
 /* ===== ABOUT SECTION ===== */
 .about {
@@ -649,27 +631,7 @@ h3 {
         margin-bottom: 0.3rem;
     }
 
-    .hero-navigation {
-        max-width: 200px;
-        margin-top: 1rem;
-    }
 
-    .nav-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-    }
-
-    .nav-dots {
-        gap: 0.3rem;
-    }
-
-    .dot {
-        width: 6px;
-        height: 6px;
-    }
 
     /* About section móvil */
     .about-content {
@@ -774,25 +736,7 @@ h3 {
         margin-bottom: 0.2rem;
     }
 
-    .hero-navigation {
-        max-width: 180px;
-        margin-top: 0.8rem;
-    }
 
-    .nav-arrow {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-    }
-
-    .nav-dots {
-        gap: 0.2rem;
-    }
-
-    .dot {
-        width: 5px;
-        height: 5px;
-    }
 
     /* Navegación para celulares pequeños */
     .nav-logo h2 {
@@ -854,8 +798,6 @@ h3 {
 @media (max-width: 768px) {
 
     /* Mejorar experiencia táctil */
-    .nav-arrow,
-    .dot,
     .filter-btn,
     .btn {
         min-height: 44px;
