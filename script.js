@@ -342,19 +342,19 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 // ===== HERO NAVIGATION =====
 const heroImages = [
     {
-        icon: 'fas fa-palette',
+        icon: 'fas fa-plus',
         title: 'Tu nombre - Artista Creativo',
         subtitle: 'Transformando ideas en arte visual',
         image: null
     },
     {
-        icon: 'fas fa-paint-brush',
+        icon: 'fas fa-plus',
         title: 'Tu nombre - Pintor',
         subtitle: 'Colores que cuentan historias',
         image: null
     },
     {
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-plus',
         title: 'Tu nombre - Dibujante',
         subtitle: 'Líneas que expresan emociones',
         image: null

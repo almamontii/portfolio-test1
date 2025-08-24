@@ -16,22 +16,22 @@ const PORTFOLIO_CONFIG = {
     // ===== HERO IMAGES =====
     heroImages: [
         {
-            icon: "fas fa-palette",
+            icon: "fas fa-plus",
             title: "Tu Nombre - Artista Creativo",
             subtitle: "Transformando ideas en arte visual"
         },
         {
-            icon: "fas fa-paint-brush",
+            icon: "fas fa-plus",
             title: "Tu Nombre - Pintor",
             subtitle: "Colores que cuentan historias"
         },
         {
-            icon: "fas fa-pencil-alt",
+            icon: "fas fa-plus",
             title: "Tu Nombre - Dibujante",
             subtitle: "Líneas que expresan emociones"
         },
         {
-            icon: "fas fa-camera",
+            icon: "fas fa-plus",
             title: "Tu Nombre - Fotógrafo",
             subtitle: "Capturando momentos únicos"
         }
