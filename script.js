@@ -442,10 +442,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Event listener para cargar imagen al hacer clic en el placeholder
+        // Event listener para cargar imagen al hacer clic en el placeholder
     const heroPlaceholder = document.querySelector('.hero-placeholder');
     if (heroPlaceholder) {
         heroPlaceholder.addEventListener('click', loadHeroImage);
+        // Agregar soporte para teclado en móvil
+        heroPlaceholder.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                loadHeroImage();
+            }
+        });
     }
     
     // Auto-rotate cada 5 segundos
@@ -453,6 +460,38 @@ document.addEventListener('DOMContentLoaded', () => {
         currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
         updateHeroContent(currentHeroIndex);
     }, 5000);
+
+    // Funcionalidad de swipe para móvil
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const heroContainer = document.querySelector('.hero-container');
+    if (heroContainer) {
+        heroContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        heroContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+    }
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe izquierda - siguiente imagen
+                currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
+            } else {
+                // Swipe derecha - imagen anterior
+                currentHeroIndex = (currentHeroIndex - 1 + heroImages.length) % heroImages.length;
+            }
+            updateHeroContent(currentHeroIndex);
+        }
+    }
 });
 
 console.log('Portfolio artístico cargado correctamente! 🎨');

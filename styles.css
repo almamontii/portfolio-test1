@@ -578,35 +578,73 @@ h3 {
     }
 
     /* Hero section móvil */
+    .hero {
+        min-height: 100vh;
+        padding-top: 60px;
+        padding-bottom: 2rem;
+    }
+
     .hero-container {
-        padding: 0 15px;
+        padding: 0 20px;
+        max-width: 100%;
     }
 
     .hero-title {
-        font-size: 2.5rem;
-        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+        line-height: 1.1;
     }
 
     .hero-main-content {
-        padding: 1.5rem;
-        min-height: 300px;
+        padding: 1rem;
+        min-height: 250px;
+        margin-bottom: 1.5rem;
+        border-radius: 0;
+    }
+
+    .hero-image-container {
+        max-width: 100%;
     }
 
     .hero-placeholder {
         width: 100%;
-        max-width: 300px;
-        height: 200px;
-        font-size: 2.5rem;
+        max-width: 100%;
+        height: 180px;
+        font-size: 2rem;
+        border-radius: 10px;
+    }
+
+    .hero-caption {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .hero-caption p:first-child {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
     }
 
     .hero-navigation {
-        max-width: 250px;
+        max-width: 200px;
+        margin-top: 1rem;
     }
 
     .nav-arrow {
-        width: 35px;
-        height: 35px;
-        font-size: 1.2rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+    }
+
+    .nav-dots {
+        gap: 0.3rem;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
     }
 
     /* About section móvil */
@@ -669,43 +707,104 @@ h3 {
         padding: 0 15px;
     }
 
-    .hero-title {
-        font-size: 2rem;
+    /* Hero section para celulares pequeños */
+    .hero {
+        padding-top: 50px;
+        padding-bottom: 1rem;
     }
 
-    .hero-subtitle {
-        font-size: 1rem;
+    .hero-container {
+        padding: 0 15px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        letter-spacing: 0.5px;
+    }
+
+    .hero-main-content {
+        padding: 0.8rem;
+        min-height: 200px;
+        margin-bottom: 1rem;
     }
 
     .hero-placeholder {
-        width: 150px;
         height: 150px;
-        font-size: 2.5rem;
-    }
-
-    .about-placeholder {
-        width: 150px;
-        height: 150px;
-        font-size: 2rem;
-    }
-
-    .section-title {
         font-size: 1.8rem;
+        border-radius: 8px;
+    }
+
+    .hero-caption {
+        margin-top: 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .hero-caption p:first-child {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .hero-navigation {
+        max-width: 180px;
+        margin-top: 0.8rem;
+    }
+
+    .nav-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .nav-dots {
+        gap: 0.2rem;
+    }
+
+    .dot {
+        width: 5px;
+        height: 5px;
+    }
+
+    /* Navegación para celulares pequeños */
+    .nav-logo h2 {
+        font-size: 1.2rem;
+    }
+
+    .nav-toggle .bar {
+        width: 22px;
+        height: 2px;
+    }
+
+    /* Secciones generales */
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
     }
 
     .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+        padding: 8px 16px;
+        font-size: 0.85rem;
     }
 
+    /* Portfolio filters */
     .portfolio-filters {
         flex-direction: column;
         align-items: center;
+        gap: 0.5rem;
     }
 
     .filter-btn {
         width: 100%;
-        max-width: 200px;
+        max-width: 180px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    /* About section */
+    .about-placeholder {
+        width: 120px;
+        height: 120px;
+        font-size: 1.5rem;
     }
 }
 
@@ -719,6 +818,43 @@ h3 {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ===== MEJORAS PARA MÓVIL ===== */
+@media (max-width: 768px) {
+    /* Mejorar experiencia táctil */
+    .nav-arrow,
+    .dot,
+    .filter-btn,
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Deshabilitar hover en móvil */
+    .portfolio-item:hover {
+        transform: none;
+    }
+
+    .nav-arrow:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #2c3e50;
+    }
+
+    /* Mejorar scroll suave */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Optimizar para pantallas táctiles */
+    .hero-placeholder {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .hero-placeholder:active {
+        transform: scale(0.98);
     }
 }
 
