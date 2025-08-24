@@ -164,7 +164,7 @@ h3 {
 }
 
 .hero-title {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 8rem;
     font-weight: 900;
     color: white;
@@ -606,9 +606,10 @@ h3 {
     }
 
     .hero-title {
-        font-family: Arial, sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 4.5rem;
         font-weight: 900;
+        color: white;
         margin-bottom: 1.5rem;
         letter-spacing: 1px;
         line-height: 0.8;
@@ -737,9 +738,10 @@ h3 {
     }
 
     .hero-title {
-        font-family: Arial, sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 3rem;
         font-weight: 900;
+        color: white;
         margin-bottom: 1rem;
         letter-spacing: 0.5px;
         line-height: 0.8;
@@ -845,6 +847,7 @@ h3 {
 
 /* ===== MEJORAS PARA MÓVIL ===== */
 @media (max-width: 768px) {
+
     /* Mejorar experiencia táctil */
     .nav-arrow,
     .dot,
