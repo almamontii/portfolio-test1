@@ -453,41 +453,7 @@ function removeHeroImage() {
     }
 }
 
-// Función para cambiar imagen de fondo
-function changeBackgroundImage() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    
-    input.onchange = function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const heroSection = document.querySelector('.hero');
-                heroSection.style.backgroundImage = `url(${e.target.result})`;
-                
-                // Guardar en localStorage
-                localStorage.setItem('backgroundImage', e.target.result);
-                
-                // Mostrar notificación
-                showNotification('Imagen de fondo cambiada correctamente!', 'success');
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-    
-    input.click();
-}
 
-// Función para cargar imagen de fondo guardada
-function loadSavedBackground() {
-    const savedBackground = localStorage.getItem('backgroundImage');
-    if (savedBackground) {
-        const heroSection = document.querySelector('.hero');
-        heroSection.style.backgroundImage = `url(${savedBackground})`;
-    }
-}
     }
 }
 
@@ -496,14 +462,51 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar imágenes guardadas al iniciar
     loadSavedImages();
     
-    // Cargar imagen de fondo guardada
-    loadSavedBackground();
+    // Sistema de navegación entre páginas
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pages = document.querySelectorAll('.page');
     
-    // Event listener para cambiar imagen de fondo
-    const bgChangeBtn = document.querySelector('.bg-change-btn');
-    if (bgChangeBtn) {
-        bgChangeBtn.addEventListener('click', changeBackgroundImage);
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Remover clase active de todos los enlaces
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            // Agregar clase active al enlace clickeado
+            link.classList.add('active');
+            
+            // Ocultar todas las páginas
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Mostrar la página correspondiente
+            const targetPage = link.getAttribute('data-page');
+            const pageToShow = document.getElementById(targetPage);
+            if (pageToShow) {
+                pageToShow.classList.add('active');
+            }
+        });
+    });
+    
+    // Menú hamburguesa móvil
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
     }
+
     
         // Event listener para cargar imagen al hacer clic en el placeholder
     const heroPlaceholder = document.querySelector('.hero-placeholder');
