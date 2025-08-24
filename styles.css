@@ -178,11 +178,11 @@ h3 {
 
 .hero-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 8rem;
+    font-size: clamp(3rem, 8vw, 8rem);
     font-weight: 900;
     color: white;
-    margin-bottom: 3rem;
-    letter-spacing: 15px;
+    margin-bottom: clamp(1.5rem, 3vw, 3rem);
+    letter-spacing: clamp(5px, 2vw, 15px);
     text-transform: uppercase;
     text-align: center;
     width: 100%;
@@ -193,7 +193,18 @@ h3 {
 
 
 .mobile-black-box {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
+    border-radius: 0;
+    min-height: clamp(300px, 25vh, 400px);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .hero-image-container {
@@ -212,16 +223,15 @@ h3 {
 
 .hero-placeholder {
     width: 100%;
-    max-width: 500px;
-    height: 40vh;
-    min-height: 250px;
+    max-width: clamp(300px, 80%, 500px);
+    height: clamp(200px, 20vh, 300px);
     background: white;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #333;
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -580,19 +590,7 @@ h3 {
 
 /* ===== ESTILOS PARA MÓVIL (TABLET Y CELULAR) ===== */
 @media (max-width: 768px) {
-    .mobile-black-box {
-        display: flex;
-        flex-direction: column;
-        background: #000;
-        padding: 2rem 1.5rem;
-        border-radius: 0;
-        min-height: 20vh;
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        align-items: center;
-        justify-content: center;
-    }
+
 
     /* Navegación móvil */
     .nav-menu {
