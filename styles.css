@@ -76,7 +76,7 @@ h3 {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 1rem 0;
@@ -93,7 +93,7 @@ h3 {
 }
 
 .nav-logo h2 {
-    color: #2c3e50;
+    color: white;
     font-size: 1.5rem;
 }
 
@@ -105,14 +105,14 @@ h3 {
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: white;
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
 }
 
 .nav-link:hover {
-    color: #667eea;
+    color: #ccc;
 }
 
 .nav-link::after {
@@ -139,7 +139,7 @@ h3 {
 .bar {
     width: 25px;
     height: 3px;
-    background: #333;
+    background: white;
     margin: 3px 0;
     transition: 0.3s;
 }
