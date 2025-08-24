@@ -452,6 +452,42 @@ function removeHeroImage() {
         showNotification('Imagen eliminada. Haz clic para agregar una nueva.', 'success');
     }
 }
+
+// Función para cambiar imagen de fondo
+function changeBackgroundImage() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const heroSection = document.querySelector('.hero');
+                heroSection.style.backgroundImage = `url(${e.target.result})`;
+                
+                // Guardar en localStorage
+                localStorage.setItem('backgroundImage', e.target.result);
+                
+                // Mostrar notificación
+                showNotification('Imagen de fondo cambiada correctamente!', 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    
+    input.click();
+}
+
+// Función para cargar imagen de fondo guardada
+function loadSavedBackground() {
+    const savedBackground = localStorage.getItem('backgroundImage');
+    if (savedBackground) {
+        const heroSection = document.querySelector('.hero');
+        heroSection.style.backgroundImage = `url(${savedBackground})`;
+    }
+}
     }
 }
 
@@ -459,6 +495,15 @@ function removeHeroImage() {
 document.addEventListener('DOMContentLoaded', () => {
     // Cargar imágenes guardadas al iniciar
     loadSavedImages();
+    
+    // Cargar imagen de fondo guardada
+    loadSavedBackground();
+    
+    // Event listener para cambiar imagen de fondo
+    const bgChangeBtn = document.querySelector('.bg-change-btn');
+    if (bgChangeBtn) {
+        bgChangeBtn.addEventListener('click', changeBackgroundImage);
+    }
     
         // Event listener para cargar imagen al hacer clic en el placeholder
     const heroPlaceholder = document.querySelector('.hero-placeholder');
